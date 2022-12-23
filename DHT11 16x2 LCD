@@ -1,0 +1,28 @@
+//Samandar Khan Afridi (19-Electrical-QUEST Nawabshah)
+//DHT11 Sensor With LCD
+#include <DHT.h>
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+#define DHT11_PIN 13
+DHT dht(DHT11_PIN,DHT11);
+
+void setup(){
+  lcd.begin(16, 2);
+  dht.begin();
+}
+
+void loop(){
+  float temp=dht.readTemperature();
+  float hum=dht.readHumidity();
+  lcd.setCursor(0,0); 
+  lcd.print("Temp: ");
+  lcd.print(temp);
+  lcd.print("C");
+  lcd.setCursor(0,1);
+  lcd.print("Humidity: ");
+  lcd.print(hum);
+  lcd.print("%");
+  delay(1000);
+}
