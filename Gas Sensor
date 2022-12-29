@@ -1,0 +1,26 @@
+
+#define GreenLed 13
+#define Sensor A0
+
+void setup(){
+  pinMode(13,OUTPUT);
+  pinMode(12,OUTPUT);
+  pinMode(A0,INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value = analogRead(A0);
+
+  Serial.print("Analogic Value coming from the sensor : ");  
+  Serial.println(value);
+  delay(100);
+
+  if(value>600){
+    digitalWrite(13,HIGH);
+  }
+  else{
+    digitalWrite(13,LOW);
+  }
+  delay(20);
+}
