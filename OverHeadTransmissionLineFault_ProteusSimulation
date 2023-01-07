@@ -1,0 +1,85 @@
+
+//Samanadar Khan Afridi (19Electrical Quaid-e-Awam University, Nawabshah, Sindh, Pakistan)
+
+#define CurrentSensor1 A0
+#define CurrentSensor2 A1
+#define CurrentSensor3 A2
+#define LineRelay1 11
+#define LineRelay2 12
+#define LineRelay3 13
+
+int adcValue1= 0;
+int adcValue2= 0;
+int adcValue3= 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(CurrentSensor1,INPUT);
+  pinMode(CurrentSensor2,INPUT);
+  pinMode(CurrentSensor3,INPUT);
+  pinMode(LineRelay1,OUTPUT);
+  pinMode(LineRelay2,OUTPUT);
+  pinMode(LineRelay3,OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly: 
+  adcValue1 = analogRead(CurrentSensor1);
+  adcValue2 = analogRead(CurrentSensor2);
+  adcValue3 = analogRead(CurrentSensor3);  
+  //Line1 GND fault
+  if (adcValue1==1004)
+  {
+    digitalWrite(LineRelay1,HIGH);
+    Serial.println("LineRelay1 is HIGH");
+    Serial.println("Line1 GND fault");
+    delay(10);
+  }  
+  //Line2 GND fault
+  if (adcValue2==1004)
+  {
+    digitalWrite(LineRelay2,HIGH);
+    Serial.println("LineRelay2 is HIGH");   
+    Serial.println("Line2 GND fault");
+    delay(10);
+  }   
+  //Line3 GND fault  
+  if (adcValue3==1004)
+  {
+    digitalWrite(LineRelay3,HIGH);
+    Serial.println("LineRelay3 is HIGH");
+    Serial.println("Line3 GND fault");
+    delay(10);
+  }
+  //Line12 short fault
+  if (adcValue1==520 && adcValue2==526)
+  {
+    digitalWrite(LineRelay1,HIGH);
+    digitalWrite(LineRelay2,HIGH);
+    Serial.println("LineRelay 1 and 2 is HIGH");
+    Serial.println("Line12 short fault");   
+    delay(10);
+  } 
+  //Line23 short fault
+  if (adcValue2==526 && adcValue3==520)
+  {
+    digitalWrite(LineRelay2,HIGH);
+    digitalWrite(LineRelay3,HIGH);
+    Serial.println("LineRelay 2 and 3 is HIGH");
+    Serial.println("Line23 short fault");
+    delay(10);
+  }
+  //Line123 short
+  if (adcValue1==519 && adcValue2==523 && adcValue3==519)
+  {
+    digitalWrite(LineRelay2,HIGH);
+    digitalWrite(LineRelay3,HIGH);
+    digitalWrite(LineRelay1,HIGH);    
+    Serial.println("LineRelay 1,2 and 3 is HIGH");
+    Serial.println("Line123 short fault");
+    delay(10);
+  } 
+  delay(800);
+}
