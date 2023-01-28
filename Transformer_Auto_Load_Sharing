@@ -1,5 +1,6 @@
 
 //Samanadar Khan Afridi (19Electrical Quaid-e-Awam University, Nawabshah, Sindh, Pakistan)
+//"https://www.youtube.com/@samandarkhanafridi" For Video Tutorial
 
 #include <LiquidCrystal.h> //library for LCD
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
