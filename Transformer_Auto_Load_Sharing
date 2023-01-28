@@ -1,0 +1,77 @@
+
+//Samanadar Khan Afridi (19Electrical Quaid-e-Awam University, Nawabshah, Sindh, Pakistan)
+
+#include <LiquidCrystal.h> //library for LCD
+LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
+
+#define ShortLineRelay 13
+#define RelayLED 12
+#define analogchannel = A0; //Connect current sensor with A0 of Arduino
+int sensitivity = 20; // use 100 for 20A Module and 66 for 30A Module
+float adcvalue= 0;
+int offsetvoltage = 2500; 
+double Voltage = 0; //voltage measuring
+double ecurrent = 0;// Current measuring
+
+
+int adcValue1= 0;
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(ShortLineRelay,OUTPUT);
+  pinMode(RelayLED,OUTPUT);
+  Serial.begin(9600);
+
+  lcd.begin(20, 4); //LCD order 20x4
+  lcd.setCursor(0,0);//Setting cursor on LCD
+  lcd.print("Samandar Khan Afridi");//Prints on the LCD
+  lcd.setCursor(0,1);
+  lcd.print("QUEST Nawabshah");
+  lcd.setCursor(0,2);
+  lcd.print("Auto TF Load Sharing");
+  delay(5000);
+}
+
+void loop() {
+  //
+  unsigned int temp=0;
+  float maxpoint = 0;
+  int i=0;
+  for(i=0;i<500;i++)
+  {
+    if(temp = analogRead(analogchannel),temp>maxpoint)
+    {
+      maxpoint = temp;
+    }
+  }
+  adcvalue = maxpoint; 
+  Voltage = (adcvalue / 1024.0) * 5000; 
+  ecurrent = ((Voltage - offsetvoltage) / sensitivity);
+  ecurrent = ( ecurrent ) / ( sqrt(2) );
+  //Prints on the serial port
+  Serial.print("Raw Value = " );
+  Serial.println(adcvalue); 
+  if (adcvalue==512)
+  {
+    digitalWrite(ShortLineRelay,LOW);
+    digitalWrite(RelayLED,LOW);
+    lcd.setCursor(0,3);
+    lcd.print("No Load On TF");
+  }  
+  if (adcvalue==615)
+  {
+    digitalWrite(ShortLineRelay,LOW);
+    digitalWrite(RelayLED,LOW);
+    lcd.setCursor(0,3);
+    lcd.print("Balanced Load On TF");
+  } 
+  if (adcvalue==754)
+  {
+    digitalWrite(ShortLineRelay,HIGH);
+    digitalWrite(RelayLED,HIGH);
+    lcd.setCursor(0,2);
+    lcd.print("OverLoad On TF");
+    lcd.setCursor(0,3);
+    lcd.print("TF2 Shares Power ON");
+  } 
+  delay(500);
+}
