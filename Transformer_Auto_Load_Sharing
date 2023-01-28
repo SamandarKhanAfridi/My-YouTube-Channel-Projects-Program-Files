@@ -7,7 +7,7 @@ LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
 
 #define ShortLineRelay 13
 #define RelayLED 12
-#define analogchannel = A0; //Connect current sensor with A0 of Arduino
+#define analogchannel A0 //Connect current sensor with A0 of Arduino
 int sensitivity = 20; // use 100 for 20A Module and 66 for 30A Module
 float adcvalue= 0;
 int offsetvoltage = 2500; 
