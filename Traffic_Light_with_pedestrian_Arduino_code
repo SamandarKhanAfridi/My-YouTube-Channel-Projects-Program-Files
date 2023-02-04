@@ -1,6 +1,6 @@
 /* ==========================================================
  *  This sketch(code) was programmed by Samandar Khan Afridi
- *  Please subcribe to my Youtube Channel: 
+ *  Please subscribe to my Youtube Channel: 
  *  https://www.youtube.com/@samandarkhanafridi
  *  for more electronics and Arduino Projects. Thank You.
  *  ==========================================================
@@ -192,7 +192,7 @@ digitalWrite (r1, HIGH);digitalWrite (r2, HIGH);digitalWrite (r3, HIGH);digitalW
 
 /* ==========================================================
  *  This sketch(code) was programmed by Samandar Khan Afridi
- *  Please subcribe to my Youtube Channel: 
+ *  Please subscribe to my Youtube Channel: 
  *  https://www.youtube.com/@samandarkhanafridi
  *  for more electronics and Arduino Projects. Thank You.
  *  ==========================================================
