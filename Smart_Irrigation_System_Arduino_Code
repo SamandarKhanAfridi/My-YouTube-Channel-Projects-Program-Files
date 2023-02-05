@@ -73,7 +73,7 @@ void loop(){
 
 void sms(){
 SIM900.print("AT+CMGF=1\r"); 
-SIM900.println("AT + CMGS = \"+233266302607\"");// recipient's mobile number
+SIM900.println("AT + CMGS = \"+923040257760\"");// recipient's mobile number
 SIM900.println("IRRIGATION PUMP IS OFF"); // your message that needs to be sent
 SIM900.println((char)26); // End AT command with a Upper Case Z, which is ASCII code 26
 Serial.println((char)26);
@@ -83,7 +83,7 @@ SIM900.println();
 
 void sms1(){
 SIM900.print("AT+CMGF=1\r"); 
-SIM900.println("AT + CMGS = \"+233266302607\"");// recipient's mobile number
+SIM900.println("AT + CMGS = \"+923040257760\"");// recipient's mobile number
 
 SIM900.println("WATER TANK PUMP IS OFF"); // your message that needs to be sent
 Serial.println("WATER TANK PUMP IS OFF");
@@ -97,7 +97,7 @@ SIM900.println();
 
 void sms2(){
 SIM900.print("AT+CMGF=1\r"); 
-SIM900.println("AT + CMGS = \"+233266302607\"");// recipient's mobile number
+SIM900.println("AT + CMGS = \"+923040257760\"");// recipient's mobile number
 
 SIM900.println("IRRIGATION PUMP IS ON"); // your message that needs to be sent
 Serial.println("IRRIGATION PUMP IS ON");
@@ -110,7 +110,7 @@ SIM900.println();
 void sms3(){
 SIM900.print("AT+CMGF=1\r"); 
 delay(1000);
-SIM900.println("AT + CMGS = \"+233266302607\"");// recipient's mobile number
+SIM900.println("AT + CMGS = \"+923040257760\"");// recipient's mobile number
 
 SIM900.println("WATER TANK PUMP IS ON"); // your message that needs to be sent
 Serial.println("WATER TANK PUMP IS ON");
