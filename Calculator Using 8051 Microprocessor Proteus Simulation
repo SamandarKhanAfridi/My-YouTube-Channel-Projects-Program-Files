@@ -142,15 +142,16 @@ void MyName()
    
    writecmd(0xd8);
  
-   writedata('S');                                 //write
-   writedata('U');                                 //write
-   writedata('B');                                 //write
-   writedata('S');                                 //write
    writedata('C');                                 //write
+   writedata('A');                                 //write
+   writedata('L');                                 //write
+   writedata('C');                                 //write
+   writedata('U');                                 //write
+   writedata('L');                                 //write
+   writedata('A');                                 //write
+   writedata('T');                                 //write
+   writedata('O');                                 //write
    writedata('R');                                 //write
-   writedata('I');                                 //write
-   writedata('B');                                 //write
-   writedata('E');                                 //write
    
    writecmd(0x80);
 }
