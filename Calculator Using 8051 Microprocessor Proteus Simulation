@@ -1,3 +1,10 @@
+/* ==========================================================
+ *  This sketch(code) was programmed by Samandar Khan Afridi
+ *  Please subscribe to my Youtube Channel: 
+ *  https://www.youtube.com/@samandarkhanafridi
+ *  for more electronics and Arduino Projects. Thank You.
+ *  ==========================================================
+*/
 
 #include<reg51.h>
 #include<string.h>
@@ -340,3 +347,11 @@ void disp_num(int numb)            //displays number on LCD
 
 	writedata(UnitDigit+0x30);	  // Make Char of UnitDigit and then display it on LCD
 }
+
+/* ==========================================================
+ *  This sketch(code) was programmed by Samandar Khan Afridi
+ *  Please subscribe to my Youtube Channel: 
+ *  https://www.youtube.com/@samandarkhanafridi
+ *  for more electronics and Arduino Projects. Thank You.
+ *  ==========================================================
+*/
