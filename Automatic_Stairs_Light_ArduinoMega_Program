@@ -1,0 +1,161 @@
+
+//This Program(Sketch) is written by Samandar Khan Afridi (Gmail: samandarkhanafridi@gmail.com)
+//Subscribe to my channel https://www.youtube.com/@samandarkhanafridi
+//for more tutorial videos
+//like, share and leave a comment if you need help. Thank you
+const int IR1=A0;
+const int IR2=A1;
+const int LedPin[]={2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25};
+int i,j,S1,S2;
+int D=100;
+void setup() 
+{
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  //Serial.println("LedPin[]");
+  for(i=0;i<=24;i++)
+  {
+    pinMode(LedPin[i],OUTPUT);
+    //Serial.println(LedPin[i]);
+    //delay(100);
+  }
+  pinMode(IR1,INPUT);
+  pinMode(IR2,INPUT);
+}
+
+void loop() 
+{
+  // put your main code here, to run repeatedly:
+  if(digitalRead(IR1)==HIGH)
+  {
+    LedsUpON();
+  }
+  else if(digitalRead(IR2)==HIGH)
+  {
+    LedsDownON();
+  }
+  else
+  {
+    LedsOFF();
+  }
+}
+
+
+void LedsUpON()
+{
+  digitalWrite(2,HIGH);
+  delay(D);
+  digitalWrite(3,HIGH);
+  delay(D);
+  digitalWrite(4,HIGH);
+  delay(D);
+  digitalWrite(5,HIGH);
+  delay(D);
+  digitalWrite(6,HIGH);
+  delay(D);
+  digitalWrite(7,HIGH);
+  delay(D);
+  digitalWrite(8,HIGH);
+  delay(D);
+  digitalWrite(9,HIGH);
+  delay(D);
+  digitalWrite(10,HIGH);
+  delay(D);
+  digitalWrite(11,HIGH);
+  delay(D);
+  digitalWrite(12,HIGH);
+  delay(D);
+  digitalWrite(13,HIGH);
+  delay(D);
+  digitalWrite(14,HIGH);
+  delay(D);
+  digitalWrite(15,HIGH);
+  delay(D);
+  digitalWrite(16,HIGH);
+  delay(D);
+  digitalWrite(17,HIGH);
+  delay(D);
+  digitalWrite(18,HIGH);
+  delay(D);
+  digitalWrite(19,HIGH);
+  delay(D);
+  digitalWrite(20,HIGH);
+  delay(D);
+  digitalWrite(21,HIGH);
+  delay(D);
+  digitalWrite(22,HIGH);
+  delay(D);
+  digitalWrite(23,HIGH);
+  delay(D);
+  digitalWrite(24,HIGH);
+  delay(D);
+  digitalWrite(25,HIGH);
+  delay(D);
+}
+
+
+void LedsDownON()
+{
+  digitalWrite(25,HIGH);
+  delay(D);
+  digitalWrite(24,HIGH);
+  delay(D);
+  digitalWrite(23,HIGH);
+  delay(D);
+  digitalWrite(22,HIGH);
+  delay(D);
+  digitalWrite(21,HIGH);
+  delay(D);
+  digitalWrite(20,HIGH);
+  delay(D);
+  digitalWrite(19,HIGH);
+  delay(D);
+  digitalWrite(18,HIGH);
+  delay(D);
+  digitalWrite(17,HIGH);
+  delay(D);
+  digitalWrite(16,HIGH);
+  delay(D);
+  digitalWrite(15,HIGH);
+  delay(D);
+  digitalWrite(14,HIGH);
+  delay(D);
+  digitalWrite(13,HIGH);
+  delay(D);
+  digitalWrite(12,HIGH);
+  delay(D);
+  digitalWrite(11,HIGH);
+  delay(D);
+  digitalWrite(10,HIGH);
+  delay(D);
+  digitalWrite(9,HIGH);
+  delay(D);
+  digitalWrite(8,HIGH);
+  delay(D);
+  digitalWrite(7,HIGH);
+  delay(D);
+  digitalWrite(6,HIGH);
+  delay(D);
+  digitalWrite(5,HIGH);
+  delay(D);
+  digitalWrite(4,HIGH);
+  delay(D);
+  digitalWrite(3,HIGH);
+  delay(D);
+  digitalWrite(2,HIGH);
+  delay(D);
+}
+
+
+void LedsOFF()
+{
+  for(i=0;i<=24;i++)
+  {
+    digitalWrite(LedPin[i],LOW);
+  }
+}
+
+//This Program(Sketch) is written by Samandar Khan Afridi (Gmail: samandarkhanafridi@gmail.com)
+//Subscribe to my channel https://www.youtube.com/@samandarkhanafridi
+//for more tutorial videos
+//like, share and leave a comment if you need help. Thank you
