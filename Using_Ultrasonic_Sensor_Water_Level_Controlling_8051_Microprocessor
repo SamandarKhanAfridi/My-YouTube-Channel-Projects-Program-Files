@@ -146,16 +146,33 @@ void main()
                     lcddta("tank is mid",11);
                     lcdcmd(0xc0);
                     lcddta("motor is on",11);
-		 
-                }else if(range<100 && range!=0){
+                }else if(range<100 && range>50){
                     mr=1;
                     lcdcmd(0x01);
                     lcdcmd(0x80);
                     lcddta("tank near to fill",20);
                     lcdcmd(0xc0);
                     lcddta("motor is on",11);
+		    while(range!=0)
+		    {
+		    mr=1;
+                    lcdcmd(0x01);
+                    lcdcmd(0x80);
+                    lcddta("tank near to fill",20);
+                    lcdcmd(0xc0);
+                    lcddta("motor is on",11);
+		        lcdcmd(0x01);
+			lcdcmd(0x80);
+			lcddta("Water_Level:",13);
+			cmd(0x8c);
+			range=ultrasonic();
+			dat((range/100)+48);
+			dat(((range/10)%10)+48);
+			dat((range%10)+48);
+			msdelay(100);
+		    }
 		 
-                }else if(range==0){
+                }else if(range>=0 && range<50){
                     mr=0;
                     lcdcmd(0x01);
                     lcdcmd(0x80);
@@ -209,6 +226,7 @@ void msdelay(unsigned int a)
     for(x=0;x<a;x++)
         for(y=0;y<1275;y++);
 }//end of msdelay
+
 
 /* ==========================================================
  *  This sketch(code) was programmed by Samandar Khan Afridi
