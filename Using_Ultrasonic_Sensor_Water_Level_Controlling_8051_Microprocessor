@@ -132,21 +132,30 @@ void main()
     dat((range%10)+48);
     msdelay(100);   
     if(gt==0){
-                if(range<100){
+                if(range>=150){
                     mr=1;
                     lcdcmd(0x01);
                     lcdcmd(0x80);
                     lcddta("tank is empty",13);
                     lcdcmd(0xc0);
                     lcddta("motor is on",11);
-                }else if(range>100 && range<150){
+                }else if(range<150 && range>100){
                     mr=1;
                     lcdcmd(0x01);
                     lcdcmd(0x80);
                     lcddta("tank is mid",11);
                     lcdcmd(0xc0);
                     lcddta("motor is on",11);
-                }else if(range>199){
+		 
+                }else if(range<100 && range!=0){
+                    mr=1;
+                    lcdcmd(0x01);
+                    lcdcmd(0x80);
+                    lcddta("tank near to fill",20);
+                    lcdcmd(0xc0);
+                    lcddta("motor is on",11);
+		 
+                }else if(range==0){
                     mr=0;
                     lcdcmd(0x01);
                     lcdcmd(0x80);
