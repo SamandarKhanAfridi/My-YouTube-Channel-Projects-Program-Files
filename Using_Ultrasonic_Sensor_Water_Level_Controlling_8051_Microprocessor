@@ -1,0 +1,211 @@
+/* ==========================================================
+ *  This sketch(code) was programmed by Samandar Khan Afridi
+ *  Please subscribe to my Youtube Channel: 
+ *  https://www.youtube.com/@samandarkhanafridi
+ *  for more electronics and Arduino Projects. Thank You.
+ *  Dated: 05-March-2023
+ *  ==========================================================
+*/
+
+#include<reg51.h>
+#include<intrins.h>
+#define lcd_data P2
+
+sfr16 DPTR=0x82;
+
+sbit trig=P3^5;
+sbit echo=P3^2;
+sbit mr=P3^6; //motor relay
+sbit gt=P3^7; //ground tank
+
+unsigned int range=0;
+
+sbit rs=P0^0;
+sbit rw=P0^1;
+sbit en=P0^2;
+
+void lcd_init();
+void cmd(unsigned char a);
+void dat(unsigned char b);
+void show(unsigned char *s);
+void lcd_delay();
+
+void lcddta(unsigned char[],unsigned char);
+void lcdcmd(unsigned char);
+void msdelay(unsigned int);
+
+void lcd_init()
+{
+  cmd(0x38);
+  cmd(0x0e);
+  cmd(0x06);
+  cmd(0x0c);
+  cmd(0x80);
+}
+
+void cmd(unsigned char a)
+{
+  lcd_data=a;
+  rs=0;
+  rw=0;
+  en=1;
+  lcd_delay();
+  en=0;
+}
+
+void dat(unsigned char b)
+{
+  lcd_data=b;
+  rs=1;
+  rw=0;
+  en=1;
+  lcd_delay();
+  en=0;
+}
+
+void show(unsigned char *s)
+{
+  while(*s) {
+    dat(*s++);
+  }
+}
+
+void lcd_delay()
+{
+  unsigned int i;
+  for(i=0;i<=1000;i++);
+}
+
+
+void send_pulse(void) 
+{
+  TH0=0x00;TL0=0x00; 
+   trig=1;
+   _nop_();_nop_();_nop_();_nop_();_nop_();
+   _nop_();_nop_();_nop_();_nop_();_nop_();
+   trig=0;
+}
+
+unsigned char ultrasonic()
+{
+  unsigned char get;
+  send_pulse();
+  while(!echo);
+  while(echo);
+  DPH=TH0;
+  DPL=TL0;
+  TH0=TL0=0xff;
+  if(DPTR<38000)
+    get=DPTR/59;
+  else
+    get=0;
+  return get;
+}
+
+
+void main()
+{
+    mr=1;
+    gt=1;
+    TMOD=0x09;
+    TH0=TL0=0;
+    TR0=1;
+    lcd_init();
+    P3|=(1<<2);
+    lcdcmd(0x38);
+    lcdcmd(0x0c);
+    lcdcmd(0x06);
+    lcdcmd(0x01);
+    lcdcmd(0x80);
+    lcddta("SamandarKhanAFridi",20);
+    lcdcmd(0xc0);
+    lcddta("WaterLevelControl",20);
+    msdelay(200);
+  while(1) {
+    lcdcmd(0x01);
+    lcdcmd(0x80);
+    lcddta("Water_Level:",13);
+    cmd(0x8c);
+    range=ultrasonic();
+    dat((range/100)+48);
+    dat(((range/10)%10)+48);
+    dat((range%10)+48);
+    msdelay(100);   
+    if(gt==0){
+                if(range<100){
+                    mr=1;
+                    lcdcmd(0x01);
+                    lcdcmd(0x80);
+                    lcddta("tank is empty",13);
+                    lcdcmd(0xc0);
+                    lcddta("motor is on",11);
+                }else if(range>100 && range<150){
+                    mr=1;
+                    lcdcmd(0x01);
+                    lcdcmd(0x80);
+                    lcddta("tank is mid",11);
+                    lcdcmd(0xc0);
+                    lcddta("motor is on",11);
+                }else if(range>199){
+                    mr=0;
+                    lcdcmd(0x01);
+                    lcdcmd(0x80);
+                    lcddta("tank is full",12);
+                    lcdcmd(0xc0);
+                    lcddta("motor is off",12);
+                }
+		else{
+	       }
+
+    }else if (gt==1){
+	    mr=0;
+            lcdcmd(0x01);
+            lcdcmd(0x80);
+            lcddta("tank 2 empty",12);
+            lcdcmd(0xc0);
+            lcddta("fill tank 2",11);
+    }else {
+    }
+   
+  }//end while loop
+}//end void main
+
+
+void lcdcmd(unsigned char cmd){
+    P2=cmd;
+    rs=0;//cmd
+    rw=0;//write
+    en=1;//latch
+    msdelay(5);
+    en=0;
+}//end of lcdcmd
+
+void lcddta(unsigned char a[],unsigned char len){
+    unsigned char x;
+
+    for(x=0;x<len;x++){
+        P2=a[x];
+        rs=1; //data
+        rw=0;
+        en=1;
+        msdelay(5);
+        en=0;
+    }//end of for
+}//end of lcddta
+
+void msdelay(unsigned int a)
+{
+    unsigned int x,y;
+
+    for(x=0;x<a;x++)
+        for(y=0;y<1275;y++);
+}//end of msdelay
+
+/* ==========================================================
+ *  This sketch(code) was programmed by Samandar Khan Afridi
+ *  Please subscribe to my Youtube Channel: 
+ *  https://www.youtube.com/@samandarkhanafridi
+ *  for more electronics and Arduino Projects. Thank You.
+ *  Dated: 05-March-2023
+ *  ==========================================================
+*/
